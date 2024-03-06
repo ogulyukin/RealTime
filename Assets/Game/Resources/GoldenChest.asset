@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e863de247e279f2b5843b72252083c93, type: 3}
+  m_Name: GoldenChest
+  m_EditorClassIdentifier: 
+  itemID: de1ff799-8e67-4845-8f41-98006dc3492f
+  chestName: Golden Chest
+  timerDuration: 10000
+  chestReward: {fileID: 11400000, guid: 63f0911359383b1dcbfc72037ec5c763, type: 2}
+  closedSprite: {fileID: 21300000, guid: a13ccb644e7afb36cbad9f0bc0060046, type: 3}
+  openedSprite: {fileID: 21300000, guid: 58bd404c664ca1a53abda44266fdd234, type: 3}

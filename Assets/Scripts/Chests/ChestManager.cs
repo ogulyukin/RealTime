@@ -1,49 +1,60 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using JetBrains.Annotations;
+using Rewards;
 using UI;
-using UnityEngine;
 using Zenject;
 
 namespace Chests
 {
     [UsedImplicitly]
-    public class ChestManager: IInitializable, IDisposable, IFixedTickable
+    public sealed class ChestManager: IDisposable, IFixedTickable
     {
         private readonly ChestPanelView _chestPanelView;
-        private readonly List<ChestView> _chestViews = new();
+        private readonly List<ChestTimer> _chestTimers = new();
+        private readonly RewardGiver _rewardGiver;
 
 
-        public ChestManager(ChestPanelView chestPanelView)
+        public ChestManager(ChestPanelView chestPanelView, RewardGiver rewardGiver)
         {
             _chestPanelView = chestPanelView;
+            _rewardGiver = rewardGiver;
         }
 
-        public void AddNewChest(string chestName, Sprite closed, Sprite opened)
+        public void AddNewChest(Chest chest, float currentDuration)
         {
-            var newChest = _chestPanelView.AddNewChest(closed, opened);
-            newChest.SetChestName(chestName);
-            _chestViews.Add(newChest);
+            var chestView = _chestPanelView.AddNewChest(chest.ClosedSprite, chest.OpenedSprite);
+            chestView.SetChestName(chest.ChestName);
+            var chestTimer = new ChestTimer(chestView, chest, currentDuration);
+            chestTimer.OnGetReward += GetReward;
+            _chestTimers.Add(chestTimer);
         }
-        
 
-        public void Initialize()
+        public List<ChestTimer> GetAllChests()
         {
-            
+            return _chestTimers;
         }
 
         public void Dispose()
         {
-            
+            foreach (var chestTimer in _chestTimers)
+            {
+                chestTimer.OnGetReward -= GetReward;
+            }
         }
 
         public void FixedTick()
         {
-            for (var i = 0; i < _chestViews.Count; i++)
+            for (var i = 0; i < _chestTimers.Count; i++)
             {
-                _chestViews[i].SetTimerText($"0:00:00");
+                _chestTimers[i].FixedTick();
             }
         }
 
+        private void GetReward(IReward reward)
+        {
+            _rewardGiver.GiveReward(reward);
+        }
     }
 }

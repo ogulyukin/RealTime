@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class ChestView : MonoBehaviour
+    public sealed class ChestView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI chestNameText;
         [SerializeField] private TextMeshProUGUI timerText;
@@ -37,6 +37,7 @@ namespace UI
         {
             closedChestImage.gameObject.SetActive(!flag);
             openedChestImage.gameObject.SetActive(flag);
+            button.enabled = flag;
         }
 
         public void InitChest(Sprite closed, Sprite opened)

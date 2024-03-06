@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e863de247e279f2b5843b72252083c93, type: 3}
+  m_Name: SteelChest
+  m_EditorClassIdentifier: 
+  itemID: 774217b7-6594-4a0a-b2db-7b2397cc5977
+  chestName: Steel Chest
+  timerDuration: 1000
+  chestReward: {fileID: 11400000, guid: 4814a52f3c909459aa1dbe6afd106f3d, type: 2}
+  closedSprite: {fileID: 21300000, guid: 57cf711a5c522ad2196754f50344eb27, type: 3}
+  openedSprite: {fileID: 21300000, guid: 64ae45c640664e057b567642fca3874a, type: 3}

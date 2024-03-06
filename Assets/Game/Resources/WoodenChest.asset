@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e863de247e279f2b5843b72252083c93, type: 3}
+  m_Name: WoodenChest
+  m_EditorClassIdentifier: 
+  itemID: 4d17ad6e-211c-446c-ad4d-f5562bfcf7fa
+  chestName: Wooden Chest
+  timerDuration: 65
+  chestReward: {fileID: 11400000, guid: 12056558ae097429aa42ba2f56737c5c, type: 2}
+  closedSprite: {fileID: 21300000, guid: 3a167c3d4ec8577b98cecd435260fbaa, type: 3}
+  openedSprite: {fileID: 21300000, guid: 8a0ad9243b614995ca10ffa88f0b328d, type: 3}

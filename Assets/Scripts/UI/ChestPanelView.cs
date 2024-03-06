@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
-    public class ChestPanelView : MonoBehaviour
+    public sealed class ChestPanelView : MonoBehaviour
     {
         [SerializeField] private GameObject chestPrefab;
 
