@@ -7,7 +7,7 @@ namespace Tools
 {
     public sealed class ChestsInstaller : MonoBehaviour
     {
-        [SerializeField] private List<Chest> chests;
+        [SerializeField] private List<ChestConfig> chests;
 
         public bool isGameLoaded;
         

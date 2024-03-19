@@ -4,6 +4,7 @@ using SaveSystem.Core;
 using SaveSystem.Data;
 using SaveSystem.FileSaverSystem;
 using SaveSystem.Tools;
+using Timer;
 using Tools;
 using UI;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace DI
         [SerializeField] private SavingSystemHelper savingSystemHelper;
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<TimersManager>().AsSingle();
             Container.Bind<ChestPanelView>().FromInstance(chestPanelView);
             Container.BindInterfacesAndSelfTo<ChestManager>().AsSingle();
             Container.Bind<ChestsInstaller>().FromInstance(chestsInstaller);

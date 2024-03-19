@@ -3,58 +3,45 @@ using System.Collections.Generic;
 using Core;
 using JetBrains.Annotations;
 using Rewards;
+using Timer;
 using UI;
-using Zenject;
 
 namespace Chests
 {
     [UsedImplicitly]
-    public sealed class ChestManager: IDisposable, IFixedTickable
+    public sealed class ChestManager: IDisposable
     {
         private readonly ChestPanelView _chestPanelView;
-        private readonly List<ChestTimer> _chestTimers = new();
+        private readonly List<ChestController> _chestControllers = new();
         private readonly RewardGiver _rewardGiver;
+        private readonly TimersManager _timersManager;
 
-
-        public ChestManager(ChestPanelView chestPanelView, RewardGiver rewardGiver)
+        public ChestManager(ChestPanelView chestPanelView, RewardGiver rewardGiver, TimersManager timersManager)
         {
             _chestPanelView = chestPanelView;
             _rewardGiver = rewardGiver;
+            _timersManager = timersManager;
         }
 
-        public void AddNewChest(Chest chest, float currentDuration)
+        public void AddNewChest(ChestConfig chestConfig, float duration)
         {
-            var chestView = _chestPanelView.AddNewChest(chest.ClosedSprite, chest.OpenedSprite);
-            chestView.SetChestName(chest.ChestName);
-            var chestTimer = new ChestTimer(chestView, chest, currentDuration);
-            chestTimer.OnGetReward += GetReward;
-            _chestTimers.Add(chestTimer);
+            var chestView = _chestPanelView.AddNewChest(chestConfig.ClosedSprite, chestConfig.OpenedSprite);
+            chestView.SetChestName(chestConfig.ChestName);
+            var chestController = new ChestController(chestView, chestConfig, _rewardGiver, _timersManager.AddNewTimer(duration));
+            _chestControllers.Add(chestController);
         }
 
-        public List<ChestTimer> GetAllChests()
+        public List<ChestController> GetAllChests()
         {
-            return _chestTimers;
+            return _chestControllers;
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
-            foreach (var chestTimer in _chestTimers)
+            foreach (var chestController in _chestControllers)
             {
-                chestTimer.OnGetReward -= GetReward;
+                chestController.Dispose();
             }
-        }
-
-        public void FixedTick()
-        {
-            for (var i = 0; i < _chestTimers.Count; i++)
-            {
-                _chestTimers[i].FixedTick();
-            }
-        }
-
-        private void GetReward(IReward reward)
-        {
-            _rewardGiver.GiveReward(reward);
         }
     }
 }

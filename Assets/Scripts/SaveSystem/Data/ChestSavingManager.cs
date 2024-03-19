@@ -53,9 +53,9 @@ namespace SaveSystem.Data
             }
         }
 
-        private Chest GetChestById(string chestId)
+        private ChestConfig GetChestById(string chestId)
         {
-            var chests = Resources.LoadAll<Chest>("");
+            var chests = Resources.LoadAll<ChestConfig>("");
             foreach (var chest in chests)
             {
                 if (chest.ItemID == chestId)

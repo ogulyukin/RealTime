@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -6,23 +7,16 @@ namespace SaveSystem.FileSaverSystem
 {
     public sealed class Saver
     {
-        private readonly string _filename;
-
-        public Saver(string filename)
+        public void Save(IEnumerable<string> data, string filename)
         {
-            this._filename = filename;
-        }
-
-        public void Save(string[] data)
-        {
-            if(File.Exists(_filename))
+            if(File.Exists(filename))
             {
-                File.Delete(_filename);
+                File.Delete(filename);
             }
         
             try
             {
-                StreamWriter sw = new StreamWriter(_filename);
+                StreamWriter sw = new StreamWriter(filename);
                 foreach (var entry in data)
                 {
                     sw.WriteLine(entry);

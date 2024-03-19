@@ -6,26 +6,23 @@ namespace SaveSystem.FileSaverSystem
 {
     public sealed class Reader
     {
-        private readonly string _filename;
-
-        public Reader(string filename)
+        public bool IsSaveFileExist(string filename)
         {
-            this._filename = filename;
+            return File.Exists(filename);
         }
 
-        public bool IsSaveFileExist()
+        public bool TryLoad(string filename, out IEnumerable<string> resultData)
         {
-            return File.Exists(_filename);
-        }
-
-        public string[] Load()
-        {
+            resultData = null;
             var resultList = new List<string>();
-            if (!IsSaveFileExist())
-                return resultList.ToArray();
+            if (!IsSaveFileExist(filename))
+            {
+                return false;
+            }
+            
             try
             {
-                StreamReader sr = new StreamReader(_filename);
+                StreamReader sr = new StreamReader(filename);
                 var line = sr.ReadLine();
                 while (line != null)
                 {
@@ -33,6 +30,7 @@ namespace SaveSystem.FileSaverSystem
                     line = sr.ReadLine();
                 }
                 sr.Close();
+                resultData = resultList;
                 Console.WriteLine("Loading success");
             }
             catch(Exception e)
@@ -40,7 +38,7 @@ namespace SaveSystem.FileSaverSystem
                 Console.WriteLine("Exception: " + e.Message);
             }
 
-            return resultList.ToArray();
+            return true;
         }
     }
 }

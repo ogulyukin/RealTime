@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e863de247e279f2b5843b72252083c93, type: 3}
   m_Name: GoldenChest
   m_EditorClassIdentifier: 
-  itemID: de1ff799-8e67-4845-8f41-98006dc3492f
-  chestName: Golden Chest
-  timerDuration: 10000
-  chestReward: {fileID: 11400000, guid: 63f0911359383b1dcbfc72037ec5c763, type: 2}
-  closedSprite: {fileID: 21300000, guid: a13ccb644e7afb36cbad9f0bc0060046, type: 3}
-  openedSprite: {fileID: 21300000, guid: 58bd404c664ca1a53abda44266fdd234, type: 3}
+  <ItemID>k__BackingField: 27024652-1c38-4482-94d8-55e23277bb2c
+  <ChestName>k__BackingField: Golden Chest
+  <TimerDuration>k__BackingField: 30000
+  <ChestRewardConfig>k__BackingField: {fileID: 11400000, guid: 63f0911359383b1dcbfc72037ec5c763, type: 2}
+  <ClosedSprite>k__BackingField: {fileID: 21300000, guid: a13ccb644e7afb36cbad9f0bc0060046, type: 3}
+  <OpenedSprite>k__BackingField: {fileID: 21300000, guid: 58bd404c664ca1a53abda44266fdd234, type: 3}

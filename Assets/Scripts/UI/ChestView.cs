@@ -23,7 +23,7 @@ namespace UI
             timerText.SetText(txt);
         }
         
-        public void AddListener(UnityAction action)
+        public void AddOpenButtonListener(UnityAction action)
         {
             button.onClick.AddListener(action);
         }
@@ -33,7 +33,7 @@ namespace UI
             button.onClick.RemoveListener(action);
         }
 
-        public void OpenChest(bool flag)
+        public void ActiveChest(bool flag)
         {
             closedChestImage.gameObject.SetActive(!flag);
             openedChestImage.gameObject.SetActive(flag);
@@ -48,7 +48,7 @@ namespace UI
 
         private void Awake()
         {
-            OpenChest(false);
+            ActiveChest(false);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Rewards
 {
     [CreateAssetMenu(menuName = ("Rewards/Chest Reward"))]
-    public sealed class ChestReward : ScriptableObject, IReward
+    public sealed class ChestRewardConfig : ScriptableObject, IReward
     {
         [SerializeField] private List<Reward> rewardsList;
 

@@ -8,6 +8,7 @@ namespace SaveSystem.Core
     [UsedImplicitly]
     public sealed class SavingSystem
     {
+        private const string Filename = "MySaveGame.sav"; //This will change to var and will managed outside this class
         private readonly ISaverLoader _saveLoader;
         private readonly List<ISaveAble> _saveAbles;
 
@@ -17,13 +18,13 @@ namespace SaveSystem.Core
             _saveAbles = saveAbles;
         }
 
-        public bool LoadScene()
+        public void LoadSceneData()
         {
-            var loadedData = _saveLoader.Load();
+            var loadedData = _saveLoader.Load(Filename);
             if (!loadedData.Any())
             {
                 Debug.Log("SS: no data loaded!");
-                return false;
+                return;
             }
             Debug.Log($"SS loaded: {loadedData.Count}");
             
@@ -31,11 +32,9 @@ namespace SaveSystem.Core
             {
                 saveAble.RestoreState(loadedData);
             }
-
-            return true;
         }
 
-        public void SaveScene()
+        public void SaveSceneData()
         {
             var state = new List<Dictionary<string, string>>();
             
@@ -44,7 +43,7 @@ namespace SaveSystem.Core
                 state.AddRange(saveAble.CaptureState());
             }
             Debug.Log($"SS: captured {state.Count} entries");
-            _saveLoader.Save(state);
+            _saveLoader.Save(state, Filename);
         }
     }
 }

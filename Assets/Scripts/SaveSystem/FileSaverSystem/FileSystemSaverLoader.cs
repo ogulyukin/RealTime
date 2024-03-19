@@ -8,18 +8,17 @@ namespace SaveSystem.FileSaverSystem
     [UsedImplicitly]
     public sealed class FileSystemSaverLoader : ISaverLoader
     {
-        private const string Filename = "MySaveGame.sav";
         private readonly Reader _reader;
         private readonly Saver _saver;
         private readonly AesEncryptionProvider _encryptionProvider = new();
 
         public FileSystemSaverLoader()
         {
-            _reader = new Reader(Filename);
-            _saver = new Saver(Filename);
+            _reader = new();
+            _saver = new();
         }
         
-        public void Save(List<Dictionary<string, string>> data)
+        public void Save(List<Dictionary<string, string>> data, string filename)
         {
             var strList = new List<string>();
             foreach (var obj in data)
@@ -27,18 +26,17 @@ namespace SaveSystem.FileSaverSystem
                 var str = JsonConvert.SerializeObject(obj);
                 strList.Add(_encryptionProvider.AesEncryption(str));
             }
-            _saver.Save(strList.ToArray());
+            _saver.Save(strList, filename);
         }
 
-        public List<Dictionary<string, string>> Load()
+        public List<Dictionary<string, string>> Load(string filename)
         {
             var result = new List<Dictionary<string, string>>();
-            if (!_reader.IsSaveFileExist())
+            if (!_reader.TryLoad(filename, out var loadedData ))
             {
                 return result;
             }
-
-            var loadedData = _reader.Load();
+            
             foreach (var data in loadedData)
             {
                 var obj = JsonConvert.DeserializeObject<Dictionary<string, string>>(_encryptionProvider.AesDecryption(data));

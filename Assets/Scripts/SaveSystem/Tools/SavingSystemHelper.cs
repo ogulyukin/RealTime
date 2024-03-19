@@ -28,13 +28,13 @@ namespace SaveSystem.Tools
 
         private void Load()
         {
-            _saveSystem.LoadScene();
+            _saveSystem.LoadSceneData();
         }
 
 
         private void Save()
         {
-            _saveSystem.SaveScene();
+            _saveSystem.SaveSceneData();
         }
     }
 }
